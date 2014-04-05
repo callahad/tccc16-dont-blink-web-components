@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Custom Elements</title>
+    <script>
+      var XFoo = document.registerElement('x-foo');
+    </script>
+
+    <script>
+      var MyButtonProto = Object.create(HTMLButtonElement.prototype);
+
+      MyButtonProto.whoAreYou = function() {
+        alert("I'm one of your buttons!");
+      }
+
+      var MyButton = document.registerElement('my-button', {
+        prototype: MyButtonProto,
+        extends: 'button',
+      });
+    </script>
+  </head>
+  <body>
+    <x-foo id="foo">Hello,</x-foo>
+    <x-foo>world</x-foo>
+
+    <hr />
+
+    <button id="b1" value="B1">One</button>
+    <button id="b2" value="B2" is="my-button">Two</button>
+
+    <!-- Create some globals for convenience -->
+    <script>
+      foo = document.getElementById('foo');
+      b1 = document.getElementById('b1');
+      b2 = document.getElementById('b2');
+    </script>
+  </body>
+</html>

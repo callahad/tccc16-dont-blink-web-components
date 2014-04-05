@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Custom Elements</title>
+    <script>
+      var XBarProto = Object.create(HTMLElement.prototype);
+
+      XBarProto.createdCallback = function() {
+        console.log("an x-bar was created!");
+      }
+
+      XBarProto.attachedCallback = function() {
+        console.log("an x-bar was attached to the view!");
+      }
+
+      XBarProto.detachedCallback = function() {
+        console.log("an x-bar was detached from the view.");
+      }
+
+      XBarProto.attributeChangedCallback = function(name, vOld, vNew) {
+        console.log("Attribute " + name + " changed from " + vOld + " to " + vNew + ".");
+      }
+
+      var XBar = document.registerElement('x-bar', {
+        prototype: XBarProto,
+      });
+    </script>
+  </head>
+  <body>
+    <x-bar id="bar">Hi!</x-bar>
+
+    <script>
+      bar = document.getElementById('bar');
+    </script>
+  </body>
+</html>

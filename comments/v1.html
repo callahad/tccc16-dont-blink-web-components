@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Templated comments</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <h2>Post Title</h2>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor nibh ac sapien cursus, ac blandit diam blandit. Nunc orci ante, scelerisque in est a, aliquam tempor sapien.</p>
+
+    <h2>Comments</h2>
+
+    <section id="comments">
+      <style scoped>
+        div { clear: both; }
+        img { float: left; width: 48; height: 48px; }
+        p { margin-left: 60px; min-height: 48px; padding-top: 12px; }
+      </style>
+      <template id="commentsTmpl">
+        <div>
+          <img />
+          <p></p>
+          <hr />
+        </div>
+      </template>
+    </section>
+
+    <h2>Footer</h2>
+
+    <p>Quisque fermentum quam vitae sapien semper, sed volutpat ante tristique.</p>
+
+    <script src="commentdata.js"></script>
+    <script>
+      var section = document.getElementById('comments');
+      var tmpl = document.getElementById('commentsTmpl').content;
+
+      function addComment(comment) {
+        var img = tmpl.querySelector('img');
+        img.src = 'i/' + comment.author + '.png';
+        img.alt = comment.author;
+        img.title = "Avatar for " + comment.author;
+
+        var p = tmpl.querySelector('p');
+        p.textContent = comment.body;
+
+        section.appendChild(tmpl.cloneNode(true));
+      }
+
+      // COMMENTS is defined by commentdata.js
+      COMMENTS.forEach(addComment);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<template id=XBlinkTmpl>
+  <style>
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    :host {
+      animation: blink 1s step-start 0s infinite;
+    }
+  </style>
+
+  <content></content>
+</template>
+
+<script>
+  var here = document.currentScript.ownerDocument;
+  tmpl = here.getElementById('XBlinkTmpl');
+
+  var proto = Object.create(HTMLElement.prototype);
+  proto.attachedCallback = function() {
+    var root = this.createShadowRoot();
+    root.appendChild(tmpl.content.cloneNode(true));
+  }
+
+  var XBlink = document.registerElement('x-blink', {
+    prototype: proto,
+  })
+</script>

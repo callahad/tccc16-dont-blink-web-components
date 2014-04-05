@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Template tag</title>
+  </head>
+  <body>
+
+    <template id="tmpl">
+      <script class="foo">alert("hi!")</script>
+      <img class="foo" src="invalid.png" />
+    </template>
+
+    <p>The script doesn't run! Yay!</p>
+
+    <p>Also, the template's contents aren't findable with <code>document.querySelector</code>.</p>
+  </body>
+</html>

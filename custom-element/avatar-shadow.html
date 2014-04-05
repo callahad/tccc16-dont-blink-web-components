@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Avatar Element</title>
+    <script>
+      (function() {
+        document.registerElement('x-avatar', {
+          prototype: Object.create(HTMLImageElement.prototype, {
+            attachedCallback: { value: function () {
+              var root = this.createShadowRoot();
+
+              var i = document.createElement('img');
+              i.src = 'avatars/' + this.getAttribute('user') + '.png';
+              root.appendChild(i);
+            }},
+            attributeChangedCallback: { value: function (name, oldV, newV) {
+              if (name === "user" && this.shadowRoot) {
+                var i = this.shadowRoot.querySelector('img');
+                i.src = 'avatars/' + newV + '.png';
+              }
+            }},
+          }),
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <x-avatar user="Alice" />
+  </body>
+</html>
